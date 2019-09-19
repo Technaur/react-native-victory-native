@@ -14,6 +14,5 @@ export const GenerateMockData = () => {
     })
   }
 
-  console.log("Result", { ...data })
   return data
 }

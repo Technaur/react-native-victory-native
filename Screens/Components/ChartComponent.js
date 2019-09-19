@@ -10,7 +10,7 @@ export class ChartComponent extends Component {
 
     return (
       <View style={{ borderWidth: 5, padding: 10, justifyContent: "center", alignItems: "center" }}>
-        <VictoryChart domainPadding={{ x: 25, y: 25 }} animate={{ duration: 1000 }}>
+        <VictoryChart domainPadding={{ x: 25, y: 25 }} animate={{ duration: 500 }}>
           <VictoryStack colorScale={"blue"}>
             <VictoryBar data={data.up} style={{ ...labelStyle }} />
             <VictoryBar data={data.down} style={{ ...labelStyle }} />

@@ -11,19 +11,17 @@ export const GenerateVictoryData = (rawData, firstDayOfMonth, lastDayOfMonth) =>
   //   console.log("whoop", dateRangeSet)
 
   const upData = rawData.map(e => {
-    return { x: moment.unix(e.date).format("DD"), y: e.up, label: e.up }
+    return { x: moment.unix(e.date).format("DD/MM"), y: e.up, label: e.up }
   })
 
   const downData = rawData.map(e => {
-    return { x: moment.unix(e.date).format("DD"), y: e.down, label: e.down }
+    return { x: moment.unix(e.date).format("DD/MM"), y: e.down, label: e.down }
   })
 
   const data = {
     up: upData,
     down: downData
   }
-
-  console.log("Data", data)
 
   return data
 }
