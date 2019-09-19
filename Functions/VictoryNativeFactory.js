@@ -2,19 +2,19 @@ import moment from "moment"
 import _ from "lodash"
 
 export const GenerateVictoryData = (rawData, firstDayOfMonth, lastDayOfMonth) => {
-  //   const dateRange = this.getGraphDateRangeArray(firstDayOfMonth, lastDayOfMonth)
-  //   console.log("dateRange", dateRange)
+  const dateRange = GetGraphDateRangeArray(firstDayOfMonth, lastDayOfMonth)
+  console.log("dateRange", dateRange)
 
-  //   const dateRangeSet = _.filter(rawData, e => {
-  //     return dateRange.includes(e.date)
-  //   })
-  //   console.log("whoop", dateRangeSet)
+  const dateRangeSet = _.filter(rawData, e => {
+    return dateRange.includes(e.date)
+  })
+  console.log("whoop", dateRangeSet)
 
-  const upData = rawData.map(e => {
+  const upData = dateRangeSet.map(e => {
     return { x: moment.unix(e.date).format("DD/MM"), y: e.up, label: e.up }
   })
 
-  const downData = rawData.map(e => {
+  const downData = dateRangeSet.map(e => {
     return { x: moment.unix(e.date).format("DD/MM"), y: e.down, label: e.down }
   })
 
@@ -24,4 +24,23 @@ export const GenerateVictoryData = (rawData, firstDayOfMonth, lastDayOfMonth) =>
   }
 
   return data
+}
+
+export const GetGraphDateRangeArray = (startDate, endDate) => {
+  const daysDiff = endDate.diff(startDate, "days")
+  const end = moment(endDate)
+    .subtract(1, "days")
+    .startOf("day")
+
+  const range = []
+  console.log("DIFF", daysDiff)
+  for (let index = 0; index <= daysDiff; index++) {
+    if (!index) {
+      range.push(end.unix())
+    } else {
+      range.push(end.subtract(1, "days").unix())
+    }
+  }
+
+  return range
 }
