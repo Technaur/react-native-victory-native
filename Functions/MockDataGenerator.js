@@ -6,7 +6,7 @@ export const GenerateMockData = () => {
   const data = []
 
   //generate one year back
-  for (let index = 0; index < 7; index++) {
+  for (let index = 0; index < 365; index++) {
     data.push({
       date: today.subtract(1, "day").unix(),
       down: Math.floor(Math.random() * 9000),

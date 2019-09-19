@@ -3,12 +3,10 @@ import _ from "lodash"
 
 export const GenerateVictoryData = (rawData, firstDayOfMonth, lastDayOfMonth) => {
   const dateRange = GetGraphDateRangeArray(firstDayOfMonth, lastDayOfMonth)
-  console.log("dateRange", dateRange)
 
   const dateRangeSet = _.filter(rawData, e => {
     return dateRange.includes(e.date)
   })
-  console.log("whoop", dateRangeSet)
 
   const upData = dateRangeSet.map(e => {
     return { x: moment.unix(e.date).format("DD/MM"), y: e.up, label: e.up }

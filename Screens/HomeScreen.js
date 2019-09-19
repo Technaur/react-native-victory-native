@@ -6,6 +6,7 @@ import _ from "lodash"
 import ChartComponent from "./Components/ChartComponent"
 import { GenerateVictoryData } from "../Functions/VictoryNativeFactory"
 import { GenerateMockData } from "../Functions/MockDataGenerator"
+import NavButtonsComponent from "./Components/NavButtonsComponent"
 
 export default class HomeScreen extends Component {
   constructor(props) {
@@ -29,24 +30,41 @@ export default class HomeScreen extends Component {
   }
 
   getFirstDayOfMonth = currentDay => {
-    return moment(currentDay).startOf("month")
+    return moment(currentDay).startOf("week")
   }
 
   getLastDayOfMonth = currentDay => {
     const today = moment().startOf("day")
 
-    if (today.isSame(currentDay, "month")) {
+    if (today.isSame(currentDay, "week")) {
       return moment(currentDay).endOf("day")
     }
-    return moment(currentDay).endOf("month")
+    return moment(currentDay).endOf("week")
   }
 
   render() {
-    const { rawData, firstDayOfMonth, lastDayOfMonth } = this.state
+    const { rawData, firstDayOfMonth, lastDayOfMonth, currentDay } = this.state
     return (
       <View>
         <Text> Victory Native </Text>
         <ChartComponent data={GenerateVictoryData(rawData, firstDayOfMonth, lastDayOfMonth)} />
+        <NavButtonsComponent
+          onNextPress={() => {
+            console.log("NEXT")
+            const tempDate = moment(currentDay).add(1, "week")
+
+            if (!tempDate.isAfter(moment())) {
+              this.populateFirstAndLastDays(tempDate)
+            }
+          }}
+          onPreviousPress={() => {
+            console.log("PREVIOUS")
+            const tempDate = moment(currentDay).subtract(1, "week")
+            if (!tempDate.isBefore(moment().add(-1, "year"))) {
+              this.populateFirstAndLastDays(tempDate)
+            }
+          }}
+        />
       </View>
     )
   }
