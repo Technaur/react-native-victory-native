@@ -6,9 +6,13 @@ export class NavButtonsComponent extends Component {
   render() {
     const { onNextPress, onPreviousPress } = this.props
     return (
-      <View>
-        <Button title="Previous" onPress={onPreviousPress} />
-        <Button title="Next" onPress={onNextPress} />
+      <View style={{ flexDirection: "row", borderWidth: 1, flex: 1 }}>
+        <Button
+          title="Previous"
+          onPress={onPreviousPress}
+          containerStyle={{ margin: 10, flex: 1 }}
+        />
+        <Button title="Next" onPress={onNextPress} containerStyle={{ margin: 10, flex: 1 }} />
       </View>
     )
   }

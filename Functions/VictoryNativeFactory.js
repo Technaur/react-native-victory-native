@@ -31,7 +31,7 @@ export const GetGraphDateRangeArray = (startDate, endDate) => {
     .startOf("day")
 
   const range = []
-  console.log("DIFF", daysDiff)
+
   for (let index = 0; index <= daysDiff; index++) {
     if (!index) {
       range.push(end.unix())

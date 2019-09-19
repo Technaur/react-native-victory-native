@@ -22,11 +22,17 @@ export default class HomeScreen extends Component {
   }
 
   populateFirstAndLastDays = currentDay => {
-    this.setState({
-      lastDayOfMonth: this.getLastDayOfMonth(currentDay),
-      firstDayOfMonth: this.getFirstDayOfMonth(currentDay),
-      currentDay
-    })
+    console.log("SET STATE")
+    this.setState(
+      {
+        lastDayOfMonth: this.getLastDayOfMonth(currentDay),
+        firstDayOfMonth: this.getFirstDayOfMonth(currentDay),
+        currentDay
+      },
+      () => {
+        console.log("SET STATE DONE")
+      }
+    )
   }
 
   getFirstDayOfMonth = currentDay => {
@@ -50,15 +56,14 @@ export default class HomeScreen extends Component {
         <ChartComponent data={GenerateVictoryData(rawData, firstDayOfMonth, lastDayOfMonth)} />
         <NavButtonsComponent
           onNextPress={() => {
-            console.log("NEXT")
+            console.log("PRESS")
             const tempDate = moment(currentDay).add(1, "week")
-
             if (!tempDate.isAfter(moment())) {
               this.populateFirstAndLastDays(tempDate)
             }
           }}
           onPreviousPress={() => {
-            console.log("PREVIOUS")
+            console.log("PRESS")
             const tempDate = moment(currentDay).subtract(1, "week")
             if (!tempDate.isBefore(moment().add(-1, "year"))) {
               this.populateFirstAndLastDays(tempDate)
