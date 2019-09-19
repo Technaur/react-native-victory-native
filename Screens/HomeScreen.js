@@ -23,6 +23,7 @@ export default class HomeScreen extends Component {
 
   populateFirstAndLastDays = currentDay => {
     console.log("SET STATE")
+    let startTime = new Date().getTime()
     this.setState(
       {
         lastDayOfMonth: this.getLastDayOfMonth(currentDay),
@@ -30,7 +31,7 @@ export default class HomeScreen extends Component {
         currentDay
       },
       () => {
-        console.log("SET STATE DONE")
+        console.log("ended in " + (new Date().getTime() - startTime) + " milliseconds")
       }
     )
   }
